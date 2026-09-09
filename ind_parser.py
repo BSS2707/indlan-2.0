@@ -250,7 +250,7 @@ class Parser:
             targets.append(self.logic_or())
             while self.match("COMMA"):
                 targets.append(self.logic_or())
-            if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ"):
+            if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ", "STARSTAREQ"):
                 op_tok = self.advance()
                 value = self.expression()
                 for t in targets:
@@ -259,12 +259,12 @@ class Parser:
                 self.skip_semis()
                 return ExprStmt(Assign(targets, value, op_tok.line, "="), line)
             raise ParseError("Expected assignment operator after target list", line)
-        if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ"):
+        if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ", "STARSTAREQ"):
             op_tok = self.advance()
             value = self.expression()
             if not isinstance(expr, (Identifier, Index, GetAttr)):
                 raise ParseError("Invalid assignment target", op_tok.line)
-            op_map = {"EQ": "=", "PLUSEQ": "+=", "MINUSEQ": "-=", "STAREQ": "*=", "SLASHEQ": "/="}
+            op_map = {"EQ": "=", "PLUSEQ": "+=", "MINUSEQ": "-=", "STAREQ": "*=", "SLASHEQ": "/=", "STARSTAREQ": "**="}
             self.skip_semis()
             return ExprStmt(Assign(expr, value, op_tok.line, op_map[op_tok.type]), line)
         self.skip_semis()
@@ -277,12 +277,12 @@ class Parser:
 
     def assignment(self):
         expr = self.logic_or()
-        if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ"):
+        if self.peek().type in ("EQ", "PLUSEQ", "MINUSEQ", "STAREQ", "SLASHEQ", "STARSTAREQ"):
             op_tok = self.advance()
             value = self.assignment()
             if not isinstance(expr, (Identifier, Index, GetAttr)):
                 raise ParseError("Invalid assignment target", op_tok.line)
-            op_map = {"EQ": "=", "PLUSEQ": "+=", "MINUSEQ": "-=", "STAREQ": "*=", "SLASHEQ": "/="}
+            op_map = {"EQ": "=", "PLUSEQ": "+=", "MINUSEQ": "-=", "STAREQ": "*=", "SLASHEQ": "/=", "STARSTAREQ": "**="}
             return Assign(expr, value, op_tok.line, op_map[op_tok.type])
         return expr
 
@@ -327,10 +327,18 @@ class Parser:
         return expr
 
     def factor(self):
-        expr = self.unary()
+        expr = self.exponentiation()
         while self.peek().type in ("STAR", "SLASH", "PERCENT"):
             op = self.advance()
-            right = self.unary()
+            right = self.exponentiation()
+            expr = BinOp(op.value, expr, right, op.line)
+        return expr
+
+    def exponentiation(self):
+        expr = self.unary()
+        if self.check("STARSTAR"):
+            op = self.advance()
+            right = self.exponentiation()  # Right-associative
             expr = BinOp(op.value, expr, right, op.line)
         return expr
 

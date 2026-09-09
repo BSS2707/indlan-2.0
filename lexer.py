@@ -50,7 +50,7 @@ HINDI_ALIASES = {
 SYMBOLS = [
     ("==", "EQEQ"), ("!=", "NEQ"), ("<=", "LE"), (">=", "GE"),
     ("->", "ARROW"), ("+=", "PLUSEQ"), ("-=", "MINUSEQ"),
-    ("*=", "STAREQ"), ("/=", "SLASHEQ"),
+    ("*=", "STAREQ"), ("/=", "SLASHEQ"), ("**=", "STARSTAREQ"), ("**", "STARSTAR"),
     ("+", "PLUS"), ("-", "MINUS"), ("*", "STAR"), ("/", "SLASH"),
     ("%", "PERCENT"), ("=", "EQ"), ("<", "LT"), (">", "GT"),
     ("(", "LPAREN"), (")", "RPAREN"), ("{", "LBRACE"), ("}", "RBRACE"),

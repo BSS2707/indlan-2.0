@@ -751,6 +751,12 @@ class Interpreter:
         if op == "*":
             self.check_number(left, line); self.check_number(right, line)
             return left * right
+        if op == "**":
+            self.check_number(left, line); self.check_number(right, line)
+            result = left ** right
+            if isinstance(left, int) and isinstance(right, int) and right >= 0:
+                return int(result)
+            return result
         if op == "/":
             self.check_number(left, line); self.check_number(right, line)
             if right == 0:
@@ -793,7 +799,8 @@ class Interpreter:
     def assign_single_target(self, target, value, op, line, env):
         if op != "=":
             current = self.evaluate(target, env)
-            base_op = op[0]  # '+', '-', '*', '/'
+            op_map = {"+=": "+", "-=": "-", "*=": "*", "/=": "/", "**=": "**"}
+            base_op = op_map.get(op, op[0])
             fake_bin = BinOp(base_op, Wrapped(current), Wrapped(value), line)
             value = self.eval_BinOp(fake_bin, env)
 
