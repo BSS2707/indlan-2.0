@@ -14,6 +14,12 @@ class StringLit(Node):
         self.value = value
         self.line = line
 
+class FString(Node):
+    def __init__(self, template, expressions, line):
+        self.template = template  # string with {} placeholders
+        self.expressions = expressions  # list of expression strings to parse
+        self.line = line
+
 class BoolLit(Node):
     def __init__(self, value, line):
         self.value = value
@@ -87,6 +93,13 @@ class GetAttr(Node):
     def __init__(self, obj, name, line):
         self.obj = obj
         self.name = name
+        self.line = line
+
+class MethodCall(Node):
+    def __init__(self, obj, method_name, args, line):
+        self.obj = obj
+        self.method_name = method_name
+        self.args = args  # list of expr nodes or KeywordArg nodes
         self.line = line
 
 class FunctionExpr(Node):

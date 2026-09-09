@@ -109,6 +109,11 @@ class Lexer:
                     self.advance(); self.advance()
                 continue
 
+            # F-strings (check for f before string)
+            if (ch == 'f' or ch == 'F') and (self.peek(1) == '"' or self.peek(1) == "'"):
+                self.tokens.append(self.read_fstring(ch))
+                continue
+
             # Strings
             if ch == '"' or ch == "'":
                 self.tokens.append(self.read_string(ch))
@@ -158,6 +163,55 @@ class Lexer:
             raise LexError("Unterminated string literal", line)
         self.advance()  # consume closing quote
         return Token("STRING", "".join(result), line)
+
+    def read_fstring(self, f_char):
+        line = self.line
+        self.advance()  # consume 'f' or 'F'
+        quote = self.peek()
+        self.advance()  # consume opening quote
+        result = []
+        expressions = []
+        in_expr = False
+        expr_start = 0
+        brace_count = 0
+        
+        while self.pos < len(self.source) and self.peek() != quote:
+            ch = self.advance()
+            
+            if ch == "\\":
+                esc = self.advance()
+                escapes = {"n": "\n", "t": "\t", "\\": "\\", '"': '"', "'": "'"}
+                result.append(escapes.get(esc, esc))
+            elif ch == "{":
+                if in_expr:
+                    brace_count += 1
+                    result.append(ch)
+                else:
+                    in_expr = True
+                    brace_count = 1
+                    expr_start = len(result)
+            elif ch == "}":
+                if in_expr:
+                    brace_count -= 1
+                    if brace_count == 0:
+                        # End of expression
+                        expr_text = "".join(result[expr_start:])
+                        expressions.append(expr_text)
+                        result = result[:expr_start]  # Remove the expression from result
+                        result.append("{}")  # Placeholder for later substitution
+                        in_expr = False
+                    else:
+                        result.append(ch)
+                else:
+                    result.append(ch)
+            else:
+                result.append(ch)
+        
+        if self.pos >= len(self.source):
+            raise LexError("Unterminated f-string literal", line)
+        self.advance()  # consume closing quote
+        
+        return Token("FSTRING", ("".join(result), expressions), line)
 
     def read_number(self):
         line = self.line

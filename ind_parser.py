@@ -380,7 +380,20 @@ class Parser:
             elif self.check("DOT"):
                 line = self.advance().line
                 name = self.expect("IDENT").value
-                expr = GetAttr(expr, name, line)
+                # Check if this is a method call (followed by LPAREN)
+                if self.check("LPAREN"):
+                    self.advance()  # consume LPAREN
+                    args = []
+                    if not self.check("RPAREN"):
+                        args.append(self.parse_call_arg())
+                        while self.match("COMMA"):
+                            if self.check("RPAREN"):
+                                break
+                            args.append(self.parse_call_arg())
+                    self.expect("RPAREN")
+                    expr = MethodCall(expr, name, args, line)
+                else:
+                    expr = GetAttr(expr, name, line)
             else:
                 break
         return expr
@@ -395,6 +408,19 @@ class Parser:
         if tok.type == "STRING":
             self.advance()
             return StringLit(tok.value, tok.line)
+
+        if tok.type == "FSTRING":
+            self.advance()
+            template, expr_strings = tok.value
+            # Parse each expression string by creating a temporary parser
+            expressions = []
+            import lexer
+            for expr_str in expr_strings:
+                expr_tokens = lexer.Lexer(expr_str).tokenize()
+                expr_parser = Parser(expr_tokens)
+                expr = expr_parser.expression()
+                expressions.append(expr)
+            return FString(template, expressions, tok.line)
 
         if tok.type == "TRUE":
             self.advance()

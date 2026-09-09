@@ -20,8 +20,8 @@ from ind_parser import parse, ParseError
 from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError, HINDI_METHOD_ALIASES
 
-APP_TITLE = "IndLan 2.0 IDE - Hindi + English Python Ecosystem"
-VERSION = "2.0.1"
+APP_TITLE = "IndLan 2.1 IDE - Hindi + English Python Ecosystem"
+VERSION = "2.1.1"
 
 # Dark Theme Colors
 THEME = {
@@ -119,7 +119,7 @@ csv_likho("students_sample.csv", students)
 maano loaded_csv = csv_padho("students_sample.csv")
 chhap("CSV Loaded:", loaded_csv)
 
-maano config = {"version": "2.0.1", "language": "IndLan", "active": true}
+maano config = {"version": "2.1.1", "language": "IndLan", "active": true}
 json_likho("config_sample.json", config)
 maano loaded_json = json_padho("config_sample.json")
 chhap("JSON Loaded:", loaded_json)

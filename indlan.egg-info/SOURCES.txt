@@ -17,6 +17,7 @@ tests/test_advanced_ecosystem.py
 tests/test_backward_compat.py
 tests/test_cli.py
 tests/test_full_example.py
+tests/test_input_functions.py
 tests/test_lexer_parser.py
 tests/test_native_helpers.py
 tests/test_pandas_numpy.py

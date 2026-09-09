@@ -265,6 +265,125 @@ class Interpreter:
                 return v.klass.name
             return type(v).__name__
 
+        def ind_abs(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 1:
+                raise IndLanRuntimeError("abs() expects exactly 1 argument", line)
+            val = args[0]
+            if not isinstance(val, (int, float)):
+                raise IndLanRuntimeError(f"abs() expects a number, got {type(val).__name__}", line)
+            return abs(val)
+
+        def ind_sqrt(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 1:
+                raise IndLanRuntimeError("sqrt() expects exactly 1 argument", line)
+            val = args[0]
+            if not isinstance(val, (int, float)):
+                raise IndLanRuntimeError(f"sqrt() expects a number, got {type(val).__name__}", line)
+            if val < 0:
+                raise IndLanRuntimeError("sqrt() cannot handle negative numbers", line)
+            import math
+            return math.sqrt(val)
+
+        def ind_max(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) == 0:
+                raise IndLanRuntimeError("max() expects at least 1 argument", line)
+            if len(args) == 1:
+                val = args[0]
+                if isinstance(val, (list, str)):
+                    return max(val)
+                raise IndLanRuntimeError("max() with single argument expects a list or string", line)
+            return max(args)
+
+        def ind_min(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) == 0:
+                raise IndLanRuntimeError("min() expects at least 1 argument", line)
+            if len(args) == 1:
+                val = args[0]
+                if isinstance(val, (list, str)):
+                    return min(val)
+                raise IndLanRuntimeError("min() with single argument expects a list or string", line)
+            return min(args)
+
+        def ind_floor(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 1:
+                raise IndLanRuntimeError("floor() expects exactly 1 argument", line)
+            val = args[0]
+            if not isinstance(val, (int, float)):
+                raise IndLanRuntimeError(f"floor() expects a number, got {type(val).__name__}", line)
+            import math
+            return math.floor(val)
+
+        def ind_ceil(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 1:
+                raise IndLanRuntimeError("ceil() expects exactly 1 argument", line)
+            val = args[0]
+            if not isinstance(val, (int, float)):
+                raise IndLanRuntimeError(f"ceil() expects a number, got {type(val).__name__}", line)
+            import math
+            return math.ceil(val)
+
+        def ind_round(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) == 0 or len(args) > 2:
+                raise IndLanRuntimeError("round() expects 1 or 2 arguments", line)
+            val = args[0]
+            if not isinstance(val, (int, float)):
+                raise IndLanRuntimeError(f"round() expects a number, got {type(val).__name__}", line)
+            digits = args[1] if len(args) == 2 else 0
+            return round(val, digits)
+
+        def ind_char(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 1:
+                raise IndLanRuntimeError("char() expects exactly 1 argument", line)
+            val = args[0]
+            if isinstance(val, int):
+                if val < 0 or val > 0x10FFFF:
+                    raise IndLanRuntimeError(f"char() argument out of valid range: {val}", line)
+                return chr(val)
+            if isinstance(val, str) and len(val) == 1:
+                return ord(val)
+            raise IndLanRuntimeError(f"char() expects an int or single character string, got {type(val).__name__}", line)
+
+        def ind_has(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 2:
+                raise IndLanRuntimeError("has() expects exactly 2 arguments (collection, value)", line)
+            col, val = args[0], args[1]
+            if isinstance(col, (list, str, dict)):
+                return val in col
+            raise IndLanRuntimeError(f"has() first argument must be list, string, or dict, got {type(col).__name__}", line)
+
+        def ind_insert(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 3:
+                raise IndLanRuntimeError("insert() expects exactly 3 arguments (list, index, value)", line)
+            lst, idx, val = args[0], args[1], args[2]
+            if not isinstance(lst, list):
+                raise IndLanRuntimeError(f"insert() first argument must be a list, got {type(lst).__name__}", line)
+            if not isinstance(idx, int):
+                raise IndLanRuntimeError(f"insert() index must be an integer, got {type(idx).__name__}", line)
+            lst.insert(idx, val)
+            return lst
+
+        def ind_remove(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            if len(args) != 2:
+                raise IndLanRuntimeError("remove() expects exactly 2 arguments (list, value)", line)
+            lst, val = args[0], args[1]
+            if not isinstance(lst, list):
+                raise IndLanRuntimeError(f"remove() first argument must be a list, got {type(lst).__name__}", line)
+            if val not in lst:
+                raise IndLanRuntimeError(f"remove() value {val!r} not found in list", line)
+            lst.remove(val)
+            return lst
+
         def ind_append(*args, **kwargs):
             line = kwargs.pop("__line__", None)
             if len(args) < 2:
@@ -525,6 +644,17 @@ class Interpreter:
             "pop": ind_pop,
             "keys": ind_keys,
             "values": ind_values,
+            "abs": ind_abs,
+            "sqrt": ind_sqrt,
+            "max": ind_max,
+            "min": ind_min,
+            "floor": ind_floor,
+            "ceil": ind_ceil,
+            "round": ind_round,
+            "char": ind_char,
+            "has": ind_has,
+            "insert": ind_insert,
+            "remove": ind_remove,
             "csv_padho": ind_csv_padho,
             "csv_likho": ind_csv_likho,
             "csv_jodo": ind_csv_jodo,
@@ -698,11 +828,53 @@ class Interpreter:
             raise IndLanRuntimeError(f"No evaluator for expression {type(node).__name__}")
         return method(node, env)
 
+    def eval_MethodCall(self, node, env):
+        obj = self.evaluate(node.obj, env)
+        line = node.line
+        
+        # Handle string methods
+        if isinstance(obj, str):
+            return self.eval_string_method(obj, node.method_name, node.args, line, env)
+        
+        # Handle list methods
+        if isinstance(obj, list):
+            return self.eval_list_method(obj, node.method_name, node.args, line, env)
+        
+        # Fall back to Python object method calls
+        if hasattr(obj, node.method_name):
+            method = getattr(obj, node.method_name)
+            if callable(method):
+                pos_args = []
+                kw_args = {}
+                for a in node.args:
+                    if isinstance(a, KeywordArg):
+                        kw_args[a.name] = self.evaluate(a.value, env)
+                    else:
+                        pos_args.append(self.evaluate(a, env))
+                try:
+                    return method(*pos_args, **kw_args)
+                except Exception as e:
+                    raise IndLanRuntimeError(f"Error calling method '{node.method_name}': {e}", line) from e
+        
+        raise IndLanRuntimeError(
+            f"Object of type '{type(obj).__name__}' has no method '{node.method_name}'",
+            line
+        )
+
     def eval_NumberLit(self, node, env):
         return node.value
 
     def eval_StringLit(self, node, env):
         return node.value
+
+    def eval_FString(self, node, env):
+        # Evaluate all expressions
+        values = [self.stringify(self.evaluate(expr, env)) for expr in node.expressions]
+        # Substitute into template
+        result = node.template
+        for value in values:
+            result = result.replace("{}", value, 1)
+        return result
 
     def eval_BoolLit(self, node, env):
         return node.value
@@ -749,6 +921,11 @@ class Interpreter:
             self.check_number(left, line); self.check_number(right, line)
             return left - right
         if op == "*":
+            # String repetition: str * int
+            if isinstance(left, str) and isinstance(right, (int, float)):
+                return left * int(right)
+            if isinstance(left, (int, float)) and isinstance(right, str):
+                return int(left) * right
             self.check_number(left, line); self.check_number(right, line)
             return left * right
         if op == "**":
@@ -934,6 +1111,109 @@ class Interpreter:
             f"Method or property '{node.name}' could not be resolved on '{type(obj).__name__}'",
             node.line
         )
+
+    def eval_string_method(self, obj, method_name, args, line, env):
+        # Evaluate arguments
+        pos_args = []
+        for a in args:
+            if isinstance(a, KeywordArg):
+                raise IndLanRuntimeError("String methods don't support keyword arguments", line)
+            pos_args.append(self.evaluate(a, env))
+        
+        if method_name == "upper":
+            if pos_args:
+                raise IndLanRuntimeError("upper() takes no arguments", line)
+            return obj.upper()
+        
+        if method_name == "lower":
+            if pos_args:
+                raise IndLanRuntimeError("lower() takes no arguments", line)
+            return obj.lower()
+        
+        if method_name == "strip":
+            if len(pos_args) > 1:
+                raise IndLanRuntimeError("strip() takes at most 1 argument", line)
+            return obj.strip(pos_args[0] if pos_args else None)
+        
+        if method_name == "lstrip":
+            if len(pos_args) > 1:
+                raise IndLanRuntimeError("lstrip() takes at most 1 argument", line)
+            return obj.lstrip(pos_args[0] if pos_args else None)
+        
+        if method_name == "rstrip":
+            if len(pos_args) > 1:
+                raise IndLanRuntimeError("rstrip() takes at most 1 argument", line)
+            return obj.rstrip(pos_args[0] if pos_args else None)
+        
+        if method_name == "replace":
+            if len(pos_args) != 2:
+                raise IndLanRuntimeError("replace() requires 2 arguments (old, new)", line)
+            return obj.replace(pos_args[0], pos_args[1])
+        
+        if method_name == "split":
+            if len(pos_args) > 1:
+                raise IndLanRuntimeError("split() takes at most 1 argument", line)
+            return obj.split(pos_args[0] if pos_args else None)
+        
+        if method_name == "startswith":
+            if len(pos_args) != 1:
+                raise IndLanRuntimeError("startswith() requires 1 argument", line)
+            return obj.startswith(pos_args[0])
+        
+        if method_name == "endswith":
+            if len(pos_args) != 1:
+                raise IndLanRuntimeError("endswith() requires 1 argument", line)
+            return obj.endswith(pos_args[0])
+        
+        if method_name == "find":
+            if len(pos_args) != 1:
+                raise IndLanRuntimeError("find() requires 1 argument", line)
+            return obj.find(pos_args[0])
+        
+        raise IndLanRuntimeError(f"String has no method '{method_name}'", line)
+
+    def eval_list_method(self, obj, method_name, args, line, env):
+        # Evaluate arguments
+        pos_args = []
+        for a in args:
+            if isinstance(a, KeywordArg):
+                raise IndLanRuntimeError("List methods don't support keyword arguments", line)
+            pos_args.append(self.evaluate(a, env))
+        
+        if method_name == "append":
+            if len(pos_args) != 1:
+                raise IndLanRuntimeError("append() requires 1 argument", line)
+            obj.append(pos_args[0])
+            return obj
+        
+        if method_name == "pop":
+            if len(pos_args) > 1:
+                raise IndLanRuntimeError("pop() takes at most 1 argument", line)
+            return obj.pop(pos_args[0] if pos_args else -1)
+        
+        if method_name == "sort":
+            if pos_args:
+                raise IndLanRuntimeError("sort() takes no arguments", line)
+            obj.sort()
+            return obj
+        
+        if method_name == "reverse":
+            if pos_args:
+                raise IndLanRuntimeError("reverse() takes no arguments", line)
+            obj.reverse()
+            return obj
+        
+        if method_name == "contains":
+            if len(pos_args) != 1:
+                raise IndLanRuntimeError("contains() requires 1 argument", line)
+            return pos_args[0] in obj
+        
+        if method_name == "len":
+            if pos_args:
+                raise IndLanRuntimeError("len() takes no arguments", line)
+            return len(obj)
+        
+        raise IndLanRuntimeError(f"List has no method '{method_name}'", line)
 
     # ---------- helpers ----------
 

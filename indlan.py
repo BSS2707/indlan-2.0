@@ -23,7 +23,7 @@ from ind_parser import parse, ParseError
 from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError
 
-__version__ = "2.0.1"
+__version__ = "2.1.1"
 
 
 def print_banner():
@@ -76,6 +76,23 @@ def run_file(path, debug=False):
     success = run_source(source, interpreter)
     if not success:
         sys.exit(1)
+
+
+def run(source, debug=False, interpreter=None):
+    """
+    Run IndLan source code from Python.
+    
+    Args:
+        source (str): IndLan source code to execute
+        debug (bool): Enable debug mode with Python tracebacks
+        interpreter (Interpreter): Optional existing interpreter instance
+    
+    Returns:
+        bool: True if execution succeeded, False otherwise
+    """
+    if interpreter is None:
+        interpreter = Interpreter(debug=debug)
+    return run_source(source, interpreter)
 
 
 def repl(debug=False):
