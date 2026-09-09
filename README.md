@@ -2,11 +2,11 @@
 
 <img src="indlan_logo.png" alt="IndLan Logo" width="180"/>
 
-# IndLan (v2.0)
+# IndLan (v2.1.2)
 ### A Modern Hindi + English Programming Interface for the Python Ecosystem
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Version 2.0.1](https://img.shields.io/badge/version-2.0.1-green.svg)](https://pypi.org/project/indlan/)
+[![Version 2.1.2](https://img.shields.io/badge/version-2.1.2-green.svg)](https://pypi.org/project/indlan/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)]()
 
@@ -31,27 +31,98 @@ Made by **Bhavya S Solanki**
   - `ganit.vargmool(16)` ➔ `math.sqrt(16)`
 - **Full Keyword Argument Support**: `train_test_split(X, y, test_size=0.25, random_state=42)`.
 - **Multi-Variable Unpacking**: `maano X_train, X_test, y_train, y_test = train_test_split(...)`.
-- **Desktop GUI IDE Included**: Full-featured dark-mode code editor with syntax highlighting, line numbers, and live output terminal.
+- **VSCode Edition IDE**: Full-featured dark-mode code editor with file explorer, find/replace, and live output terminal.
 - **Standalone `.EXE` Executables**: Pre-compiled binaries (`IndLan_IDE.exe` and `IndLan.exe`) for Windows.
 - **Missing Package Diagnostics**: Actionable installation instructions recommending specific `pip` extras.
 
 ---
 
-## 💻 IndLan 2.0 Desktop GUI IDE
+## 🆕 What's New in v2.1.2
 
-IndLan 2.0 comes with a built-in Desktop GUI IDE:
+### F-String Interpolation
+```indlan
+maano naam = "Bhavya"
+maano umar = 17
+chhap(f"Namaste {naam}!")
+chhap(f"Agli baar aap {umar + 1} ke honge.")
+chhap(f"2 ka 10 ghaat = {2 ** 10}")
+```
+
+### String Methods
+```indlan
+maano text = "  Hello World  "
+chhap("Upper: " + text.upper())
+chhap("Lower: " + text.lower())
+chhap("Strip: " + text.strip())
+chhap("Replace: " + text.replace("World", "IndLan"))
+chhap("Split: " + str(text.strip().split(" ")))
+```
+
+### List Methods
+```indlan
+maano numbers = [3, 1, 4, 1, 5]
+numbers.sort()
+chhap("Sorted: " + str(numbers))
+numbers.reverse()
+chhap("Reversed: " + str(numbers))
+chhap("Contains 5: " + str(numbers.contains(5)))
+chhap("Length: " + str(numbers.len()))
+```
+
+### Math Built-in Functions
+```indlan
+chhap("abs(-5): " + str(abs(-5)))
+chhap("sqrt(16): " + str(sqrt(16)))
+chhap("max(10, 20, 5): " + str(max(10, 20, 5)))
+chhap("min(10, 20, 5): " + str(min(10, 20, 5)))
+chhap("floor(3.7): " + str(floor(3.7)))
+chhap("ceil(3.2): " + str(ceil(3.2)))
+chhap("round(3.7): " + str(round(3.7)))
+```
+
+### Additional Built-in Functions
+- `char(v)` - int↔char conversion (ord/chr)
+- `has(col, v)` - membership check for collections
+- `insert(lst, i, v)` - insert value at index
+- `remove(lst, v)` - remove first occurrence
+
+### Enhanced Operators
+- String repetition: `"ha" * 3` → `"hahaha"`
+- Negative indexing: `arr[-1]` (from end of list/string)
+- Compound assignment: `**=` for exponentiation
+
+### Python API Integration
+```python
+import indlan as ind
+
+code = '''
+maano naam = "Bhavya"
+chhap(f"Namaste {naam}!")
+'''
+ind.run(code)
+```
+
+---
+
+## 💻 IndLan 2.1.2 VSCode Edition IDE
+
+IndLan 2.1.2 comes with a VSCode-like Desktop GUI IDE:
 
 ```bash
 indlan ide        # or simply: indlan
 ```
 
 ### IDE Features:
+- **File Explorer Sidebar**: Browse and open files with directory navigation
+- **Find & Replace**: Ctrl+F for find, Ctrl+H for replace functionality
+- **Font Size Control**: Ctrl++ to increase, Ctrl+- to decrease, Ctrl+0 to reset
+- **Tab Navigation**: Ctrl+Tab for next tab, Ctrl+Shift+Tab for previous, Ctrl+W to close
 - **Real-Time Bilingual Syntax Highlighting**: Color-coded syntax for Hindi keywords, English keywords, ML method aliases, strings, numbers, and comments.
 - **Synchronized Line Numbers Gutter**: Tracks cursor and scrolling.
 - **Multi-Tab File Management**: Open, edit, and save multiple `.ind` files.
 - **Integrated Terminal Console**: View program output and errors with color tags.
 - **One-Click Run (F5)** & Output Clearing.
-- **Preloaded Code Templates**: Instant snippets for Data Science, Machine Learning, Plotting, and OOP.
+- **Preloaded Code Templates**: Instant snippets for Data Science, Machine Learning, F-strings, Math functions, and more.
 
 ---
 
@@ -93,7 +164,7 @@ indlan repl                        # Start Interactive REPL
 indlan program.ind                 # Run an IndLan script
 indlan run program.ind             # Run an IndLan script
 indlan --debug program.ind         # Run with detailed Python tracebacks
-indlan --version                   # Show version (2.0.1)
+indlan --version                   # Show version (2.1.2)
 indlan --help                      # Show help menu
 ```
 
@@ -321,6 +392,35 @@ IndLan provides out-of-the-box native functions for quick file operations:
 
 ---
 
+## 🔢 New Built-in Functions (v2.1.2)
+
+### Math Functions
+- `abs(n)`: Absolute value
+- `sqrt(n)`: Square root
+- `max(a, b, ...)` or `max(lst)`: Maximum value
+- `min(a, b, ...)` or `min(lst)`: Minimum value
+- `floor(n)`: Round down to nearest integer
+- `ceil(n)`: Round up to nearest integer
+- `round(n, digits?)`: Round to specified decimal places
+
+### Utility Functions
+- `char(v)`: int→char or char→int conversion (ord/chr)
+- `has(col, v)`: Check if value exists in collection (list, string, dict)
+- `insert(lst, i, v)`: Insert value at index in list
+- `remove(lst, v)`: Remove first occurrence of value from list
+
+### String & List Methods
+- String: `.upper()`, `.lower()`, `.strip()`, `.lstrip()`, `.rstrip()`, `.replace(old, new)`, `.split(sep?)`, `.startswith(x)`, `.endswith(x)`, `.find(x)`
+- List: `.append(v)`, `.pop(i?)`, `.sort()`, `.reverse()`, `.contains(v)`, `.len()`
+
+### Enhanced Operators
+- String repetition: `"ha" * 3` → `"hahaha"`
+- Negative indexing: `arr[-1]` (access from end)
+- Exponentiation: `2 ** 10` → `1024`
+- Compound assignment: `**=` for exponentiation
+
+---
+
 ## ⌨️ User-Input Functions
 
 IndLan provides intuitive bilingual functions to read user input from the console, terminal, or IDE:
@@ -359,7 +459,7 @@ To publish a new version of IndLan to PyPI:
    ```
 3. **Upload to PyPI**:
    ```bash
-   python -m twine upload dist/indlan-2.0.1*
+   python -m twine upload dist/indlan-2.1.2*
    ```
    *(Enter `__token__` for username and your PyPI API token for password).*
 
@@ -372,7 +472,7 @@ To build standalone Windows executables (`IndLan.exe` and `IndLan_IDE.exe`):
 ```bash
 python build_exe.py
 ```
-The output binaries with custom icons are placed in the `dist/` directory.
+The enhanced build script automatically cleans previous builds and creates optimized binaries with custom icons in the `dist/` directory.
 
 ---
 
@@ -380,4 +480,4 @@ The output binaries with custom icons are placed in the `dist/` directory.
 
 This project is licensed under the **MIT License**.
 
-Made with ❤️ by **Bhavya S Solanki**.#
+Made with ❤️ by **Bhavya S Solanki**.
