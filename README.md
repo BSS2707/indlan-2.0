@@ -2,15 +2,17 @@
 
 <img src="indlan_logo.png" alt="IndLan Logo" width="180"/>
 
-# IndLan (v2.1.2)
-### A Modern Hindi + English Programming Interface for the Python Ecosystem
+# IndLan (v2.1.3)
+### A Modern Hindi + English Programming Interface for the Python Ecosystem with VSCode Edition IDE
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Version 2.1.2](https://img.shields.io/badge/version-2.1.2-green.svg)](https://pypi.org/project/indlan/)
+[![Version 2.1.3](https://img.shields.io/badge/version-2.1.3-green.svg)](https://pypi.org/project/indlan/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)]()
 
 **IndLan** allows you to use real Python libraries (**Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, TensorFlow, PyTorch, Plotly, Joblib, Openpyxl, OpenCV, SQLite3, NLTK**) directly using intuitive **Hindi and English** syntax.
+
+🎯 **NEW v2.1.3**: VSCode Edition IDE with File Explorer, Find/Replace, Enhanced Templates, and Python API Integration
 
 Made by **Bhavya S Solanki**
 
@@ -20,26 +22,67 @@ Made by **Bhavya S Solanki**
 
 ## 🚀 Key Highlights
 
-- **Bilingual Interface**: Write code using either Hindi keywords or standard English syntax interchangeably.
-- **Real Python Objects**: Objects remain genuine `pandas.DataFrame`, `numpy.ndarray`, `torch.Tensor`, `sklearn` models.
-- **Universal & Library-Specific Aliases**:
+- **🖥️ VSCode Edition IDE**: Professional dark-mode IDE with file explorer sidebar, find/replace, font controls, tab navigation, and integrated terminal
+- **🌐 Bilingual Interface**: Write code using either Hindi keywords or standard English syntax interchangeably
+- **🔗 Real Python Objects**: Objects remain genuine `pandas.DataFrame`, `numpy.ndarray`, `torch.Tensor`, `sklearn` models
+- **🎯 Universal & Library-Specific Aliases**:
   - `model.sikhao(X, y)` ➔ `model.fit(X, y)`
   - `model.bhavishyavani(X)` ➔ `model.predict(X)`
   - `np.sarni([1, 2, 3])` ➔ `np.array([1, 2, 3])`
   - `pd.csv_padho("file.csv")` ➔ `pd.read_csv("file.csv")`
   - `plt.rekha(x, y)` ➔ `plt.plot(x, y)`
   - `ganit.vargmool(16)` ➔ `math.sqrt(16)`
-- **Full Keyword Argument Support**: `train_test_split(X, y, test_size=0.25, random_state=42)`.
-- **Multi-Variable Unpacking**: `maano X_train, X_test, y_train, y_test = train_test_split(...)`.
-- **VSCode Edition IDE**: Full-featured dark-mode code editor with file explorer, find/replace, and live output terminal.
-- **Standalone `.EXE` Executables**: Pre-compiled binaries (`IndLan_IDE.exe` and `IndLan.exe`) for Windows.
-- **Missing Package Diagnostics**: Actionable installation instructions recommending specific `pip` extras.
+- **📝 F-String Interpolation**: Modern string formatting with embedded expressions
+- **🔢 Enhanced Built-in Functions**: Math functions, string/list methods, utility functions
+- **⚡ Full Keyword Argument Support**: `train_test_split(X, y, test_size=0.25, random_state=42)`
+- **📦 Multi-Variable Unpacking**: `maano X_train, X_test, y_train, y_test = train_test_split(...)`
+- **🐍 Python API Integration**: `import indlan as ind; ind.run(source_code)`
+- **💻 Standalone `.EXE` Executables**: Pre-compiled binaries (`IndLan_IDE.exe` and `IndLan.exe`) for Windows
+- **🔧 Enhanced Build Process**: Automatic cleaning, better error handling, improved .exe creation
 
 ---
 
-## 🆕 What's New in v2.1.2
+## 🖥️ VSCode Edition IDE (NEW v2.1.3)
 
-### F-String Interpolation
+IndLan 2.1.3 features a professional VSCode-like Desktop GUI IDE:
+
+```bash
+indlan ide        # or simply: indlan
+```
+
+### 🎨 IDE Features:
+- **📁 File Explorer Sidebar**: Browse directories, navigate folders, double-click to open files
+- **🔍 Find & Replace**: Ctrl+F for find, Ctrl+H for find and replace functionality
+- **🔤 Font Size Control**: Ctrl++ to increase, Ctrl+- to decrease, Ctrl+0 to reset font size
+- **📑 Tab Navigation**: Ctrl+Tab for next tab, Ctrl+Shift+Tab for previous, Ctrl+W to close tab
+- **🎨 Real-Time Bilingual Syntax Highlighting**: Color-coded syntax for Hindi keywords, English keywords, ML method aliases, strings, numbers, and comments
+- **📏 Synchronized Line Numbers Gutter**: Tracks cursor and scrolling
+- **📑 Multi-Tab File Management**: Open, edit, and save multiple `.ind` files
+- **💻 Integrated Terminal Console**: View program output and errors with color tags
+- **▶️ One-Click Run (F5)** & Output Clearing
+- **📝 Preloaded Code Templates**: Instant snippets for Data Science, Machine Learning, F-strings, Math functions, Python API, and more
+- **⌨️ Keyboard Shortcuts**: Comprehensive shortcut system for efficient coding
+
+### 🎯 New Templates in v2.1.3:
+- F-Strings & String Methods
+- Math & Built-in Functions  
+- Python API Integration
+- Advanced Features (negative indexing, string repetition, compound assignment)
+
+---
+
+## 🆕 What's New in v2.1.3
+
+### 🖥️ VSCode Edition IDE (Major Feature!)
+- **File Explorer Sidebar**: Browse directories, navigate folders, double-click to open files
+- **Find & Replace**: Ctrl+F for find, Ctrl+H for find and replace functionality  
+- **Font Size Control**: Ctrl++ to increase, Ctrl+- to decrease, Ctrl+0 to reset font size
+- **Tab Navigation**: Ctrl+Tab for next tab, Ctrl+Shift+Tab for previous, Ctrl+W to close tab
+- **Enhanced Toolbar**: Better icons, improved layout, professional VSCode-like interface
+- **New Code Templates**: F-strings, Math functions, Python API integration, and advanced features
+- **Keyboard Shortcuts**: Comprehensive shortcut system for efficient coding
+
+### 🌟 F-String Interpolation
 ```indlan
 maano naam = "Bhavya"
 maano umar = 17
@@ -48,7 +91,7 @@ chhap(f"Agli baar aap {umar + 1} ke honge.")
 chhap(f"2 ka 10 ghaat = {2 ** 10}")
 ```
 
-### String Methods
+### 🔤 String Methods
 ```indlan
 maano text = "  Hello World  "
 chhap("Upper: " + text.upper())
@@ -58,7 +101,7 @@ chhap("Replace: " + text.replace("World", "IndLan"))
 chhap("Split: " + str(text.strip().split(" ")))
 ```
 
-### List Methods
+### 📋 List Methods
 ```indlan
 maano numbers = [3, 1, 4, 1, 5]
 numbers.sort()
@@ -69,7 +112,7 @@ chhap("Contains 5: " + str(numbers.contains(5)))
 chhap("Length: " + str(numbers.len()))
 ```
 
-### Math Built-in Functions
+### 🔢 Math Built-in Functions
 ```indlan
 chhap("abs(-5): " + str(abs(-5)))
 chhap("sqrt(16): " + str(sqrt(16)))
@@ -80,18 +123,18 @@ chhap("ceil(3.2): " + str(ceil(3.2)))
 chhap("round(3.7): " + str(round(3.7)))
 ```
 
-### Additional Built-in Functions
+### 🛠️ Additional Built-in Functions
 - `char(v)` - int↔char conversion (ord/chr)
 - `has(col, v)` - membership check for collections
 - `insert(lst, i, v)` - insert value at index
 - `remove(lst, v)` - remove first occurrence
 
-### Enhanced Operators
+### ⚡ Enhanced Operators
 - String repetition: `"ha" * 3` → `"hahaha"`
 - Negative indexing: `arr[-1]` (from end of list/string)
 - Compound assignment: `**=` for exponentiation
 
-### Python API Integration
+### 🐍 Python API Integration
 ```python
 import indlan as ind
 
@@ -104,29 +147,7 @@ ind.run(code)
 
 ---
 
-## 💻 IndLan 2.1.2 VSCode Edition IDE
-
-IndLan 2.1.2 comes with a VSCode-like Desktop GUI IDE:
-
-```bash
-indlan ide        # or simply: indlan
-```
-
-### IDE Features:
-- **File Explorer Sidebar**: Browse and open files with directory navigation
-- **Find & Replace**: Ctrl+F for find, Ctrl+H for replace functionality
-- **Font Size Control**: Ctrl++ to increase, Ctrl+- to decrease, Ctrl+0 to reset
-- **Tab Navigation**: Ctrl+Tab for next tab, Ctrl+Shift+Tab for previous, Ctrl+W to close
-- **Real-Time Bilingual Syntax Highlighting**: Color-coded syntax for Hindi keywords, English keywords, ML method aliases, strings, numbers, and comments.
-- **Synchronized Line Numbers Gutter**: Tracks cursor and scrolling.
-- **Multi-Tab File Management**: Open, edit, and save multiple `.ind` files.
-- **Integrated Terminal Console**: View program output and errors with color tags.
-- **One-Click Run (F5)** & Output Clearing.
-- **Preloaded Code Templates**: Instant snippets for Data Science, Machine Learning, F-strings, Math functions, and more.
-
----
-
-## 📦 Installation & Extras
+##  Installation & Extras
 
 ### Core Engine
 ```bash
@@ -158,13 +179,13 @@ pip install "indlan[full]"
 ## ⚡ CLI Commands
 
 ```bash
-indlan                             # Launch Desktop GUI IDE
-indlan ide                         # Launch Desktop GUI IDE
+indlan                             # Launch VSCode Edition IDE
+indlan ide                         # Launch VSCode Edition IDE
 indlan repl                        # Start Interactive REPL
 indlan program.ind                 # Run an IndLan script
 indlan run program.ind             # Run an IndLan script
 indlan --debug program.ind         # Run with detailed Python tracebacks
-indlan --version                   # Show version (2.1.2)
+indlan --version                   # Show version (2.1.3)
 indlan --help                      # Show help menu
 ```
 
@@ -392,7 +413,7 @@ IndLan provides out-of-the-box native functions for quick file operations:
 
 ---
 
-## 🔢 New Built-in Functions (v2.1.2)
+## 🔢 New Built-in Functions (v2.1.3)
 
 ### Math Functions
 - `abs(n)`: Absolute value
@@ -459,7 +480,7 @@ To publish a new version of IndLan to PyPI:
    ```
 3. **Upload to PyPI**:
    ```bash
-   python -m twine upload dist/indlan-2.1.2*
+   python -m twine upload dist/indlan-2.1.3*
    ```
    *(Enter `__token__` for username and your PyPI API token for password).*
 
@@ -472,7 +493,7 @@ To build standalone Windows executables (`IndLan.exe` and `IndLan_IDE.exe`):
 ```bash
 python build_exe.py
 ```
-The enhanced build script automatically cleans previous builds and creates optimized binaries with custom icons in the `dist/` directory.
+The enhanced build script automatically cleans previous builds and creates optimized VSCode Edition IDE binaries with custom icons in the `dist/` directory.
 
 ---
 

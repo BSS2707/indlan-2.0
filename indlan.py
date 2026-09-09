@@ -23,7 +23,7 @@ from ind_parser import parse, ParseError
 from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError
 
-__version__ = "2.1.2"
+__version__ = "2.1.3"
 
 
 def print_banner():

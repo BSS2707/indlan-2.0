@@ -21,7 +21,7 @@ from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError, HINDI_METHOD_ALIASES
 
 APP_TITLE = "IndLan 2.1 IDE - VSCode Edition"
-VERSION = "2.1.2"
+VERSION = "2.1.3"
 
 # Dark Theme Colors
 THEME = {
