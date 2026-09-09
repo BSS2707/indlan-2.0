@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "indlan"
-version = "2.1.1"
-description = "IndLan Programming Language - Hindi + English Python Ecosystem Interface"
+version = "2.1.2"
+description = "IndLan Programming Language - Hindi + English Python Ecosystem Interface - VSCode Edition"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
