@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "indlan"
-version = "2.1.3"
+version = "2.1.4"
 description = "IndLan Programming Language - Hindi + English Python Ecosystem Interface - VSCode Edition IDE with File Explorer, Find/Replace, and Enhanced Features"
 readme = "README.md"
 requires-python = ">=3.8"

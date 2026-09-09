@@ -5,7 +5,7 @@ a = Analysis(
     ['indlan_ide.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('README.md', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

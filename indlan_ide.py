@@ -21,7 +21,7 @@ from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError, HINDI_METHOD_ALIASES
 
 APP_TITLE = "IndLan 2.1 IDE - VSCode Edition"
-VERSION = "2.1.3"
+VERSION = "2.1.4"
 
 # Dark Theme Colors
 THEME = {
@@ -119,7 +119,7 @@ csv_likho("students_sample.csv", students)
 maano loaded_csv = csv_padho("students_sample.csv")
 chhap("CSV Loaded:", loaded_csv)
 
-maano config = {"version": "2.1.2", "language": "IndLan", "active": true}
+maano config = {"version": "2.1.4", "language": "IndLan", "active": true}
 json_likho("config_sample.json", config)
 maano loaded_json = json_padho("config_sample.json")
 chhap("JSON Loaded:", loaded_json)
@@ -196,7 +196,7 @@ chhap("Doubled: " + str(doubled))
 
 // F-string with expressions
 maano name = "IndLan"
-maano version = "2.1.1"
+maano version = "2.1.4"
 chhap(f"Welcome to {name} v{version}!")
 """,
 
@@ -1060,7 +1060,7 @@ class IndLanIDE(tk.Tk):
             "IndLan 2.1 IDE - VSCode Edition\n"
             "Hindi + English Programming Interface for Python Ecosystem\n\n"
             "Author: Bhavya S Solanki\n"
-            "Version: 2.1.1\n"
+            "Version: 2.1.4\n"
             "License: MIT\n\n"
             "Features:\n"
             "• F-string interpolation\n"

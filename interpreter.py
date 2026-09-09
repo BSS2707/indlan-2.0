@@ -840,9 +840,9 @@ class Interpreter:
         if isinstance(obj, list):
             return self.eval_list_method(obj, node.method_name, node.args, line, env)
         
-        # Fall back to Python object method calls
-        if hasattr(obj, node.method_name):
-            method = getattr(obj, node.method_name)
+        # Resolve Python methods through the bridge so Hindi aliases work for modules too.
+        found, method = resolve_attribute(obj, node.method_name, line)
+        if found:
             if callable(method):
                 pos_args = []
                 kw_args = {}

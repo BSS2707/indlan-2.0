@@ -13,7 +13,7 @@ import shutil
 
 def clean_build_dirs():
     """Clean previous build directories"""
-    dirs_to_clean = ['build', 'dist', '__pycache__']
+    dirs_to_clean = ['build', '__pycache__']
     for dir_name in dirs_to_clean:
         if os.path.exists(dir_name):
             print(f"Cleaning {dir_name}...")

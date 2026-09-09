@@ -2,17 +2,17 @@
 
 <img src="indlan_logo.png" alt="IndLan Logo" width="180"/>
 
-# IndLan (v2.1.3)
+# IndLan (v2.1.4)
 ### A Modern Hindi + English Programming Interface for the Python Ecosystem with VSCode Edition IDE
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Version 2.1.3](https://img.shields.io/badge/version-2.1.3-green.svg)](https://pypi.org/project/indlan/)
+[![Version 2.1.4](https://img.shields.io/badge/version-2.1.4-green.svg)](https://pypi.org/project/indlan/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)]()
 
 **IndLan** allows you to use real Python libraries (**Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, TensorFlow, PyTorch, Plotly, Joblib, Openpyxl, OpenCV, SQLite3, NLTK**) directly using intuitive **Hindi and English** syntax.
 
-🎯 **NEW v2.1.3**: VSCode Edition IDE with File Explorer, Find/Replace, Enhanced Templates, and Python API Integration
+🎯 **NEW v2.1.4**: VSCode Edition IDE with File Explorer, Find/Replace, Enhanced Templates, and Python API Integration
 
 Made by **Bhavya S Solanki**
 
@@ -42,9 +42,9 @@ Made by **Bhavya S Solanki**
 
 ---
 
-## 🖥️ VSCode Edition IDE (NEW v2.1.3)
+## 🖥️ VSCode Edition IDE (NEW v2.1.4)
 
-IndLan 2.1.3 features a professional VSCode-like Desktop GUI IDE:
+IndLan 2.1.4 features a professional VSCode-like Desktop GUI IDE:
 
 ```bash
 indlan ide        # or simply: indlan
@@ -63,7 +63,7 @@ indlan ide        # or simply: indlan
 - **📝 Preloaded Code Templates**: Instant snippets for Data Science, Machine Learning, F-strings, Math functions, Python API, and more
 - **⌨️ Keyboard Shortcuts**: Comprehensive shortcut system for efficient coding
 
-### 🎯 New Templates in v2.1.3:
+### 🎯 New Templates in v2.1.4:
 - F-Strings & String Methods
 - Math & Built-in Functions  
 - Python API Integration
@@ -71,7 +71,7 @@ indlan ide        # or simply: indlan
 
 ---
 
-## 🆕 What's New in v2.1.3
+## 🆕 What's New in v2.1.4
 
 ### 🖥️ VSCode Edition IDE (Major Feature!)
 - **File Explorer Sidebar**: Browse directories, navigate folders, double-click to open files
@@ -185,7 +185,7 @@ indlan repl                        # Start Interactive REPL
 indlan program.ind                 # Run an IndLan script
 indlan run program.ind             # Run an IndLan script
 indlan --debug program.ind         # Run with detailed Python tracebacks
-indlan --version                   # Show version (2.1.3)
+indlan --version                   # Show version (2.1.4)
 indlan --help                      # Show help menu
 ```
 
@@ -413,7 +413,7 @@ IndLan provides out-of-the-box native functions for quick file operations:
 
 ---
 
-## 🔢 New Built-in Functions (v2.1.3)
+## 🔢 New Built-in Functions (v2.1.4)
 
 ### Math Functions
 - `abs(n)`: Absolute value
@@ -480,7 +480,7 @@ To publish a new version of IndLan to PyPI:
    ```
 3. **Upload to PyPI**:
    ```bash
-   python -m twine upload dist/indlan-2.1.3*
+   python -m twine upload dist/indlan-2.1.4*
    ```
    *(Enter `__token__` for username and your PyPI API token for password).*
 

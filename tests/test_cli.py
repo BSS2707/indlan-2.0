@@ -6,7 +6,7 @@ import pytest
 def test_cli_version():
     result = subprocess.run([sys.executable, "indlan.py", "--version"], capture_output=True, text=True)
     assert result.returncode == 0
-    assert "IndLan version 2.0.1" in result.stdout
+    assert "IndLan version 2.1.4" in result.stdout
 
 
 def test_cli_help():
