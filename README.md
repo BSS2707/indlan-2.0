@@ -356,5 +356,4 @@ The output binaries with custom icons are placed in the `dist/` directory.
 
 This project is licensed under the **MIT License**.
 
-Made with ❤️ by **Bhavya S Solanki**.#   i n d l a n - 2 . 0  
- 
+Made with ❤️ by **Bhavya S Solanki**.#
