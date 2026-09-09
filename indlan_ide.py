@@ -119,7 +119,7 @@ csv_likho("students_sample.csv", students)
 maano loaded_csv = csv_padho("students_sample.csv")
 chhap("CSV Loaded:", loaded_csv)
 
-maano config = {"version": "2.0.0", "language": "IndLan", "active": true}
+maano config = {"version": "2.0.1", "language": "IndLan", "active": true}
 json_likho("config_sample.json", config)
 maano loaded_json = json_padho("config_sample.json")
 chhap("JSON Loaded:", loaded_json)
