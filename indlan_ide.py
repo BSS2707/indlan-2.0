@@ -11,7 +11,7 @@ import io
 import re
 import threading
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox, font
+from tkinter import ttk, filedialog, messagebox, font, simpledialog
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -286,7 +286,13 @@ class CodeEditorTab(ttk.Frame):
             self.text.tag_add("method_alias", f"1.0 + {m.start()} chars", f"1.0 + {m.end()} chars")
 
         # Builtins
-        builtins = ["print", "chhap", "len", "range", "str", "int", "float", "input", "type", "append", "pop", "keys", "values", "csv_padho", "csv_likho", "json_padho", "json_likho", "excel_padho", "excel_likho"]
+        builtins = [
+            "print", "chhap", "len", "range", "str", "int", "float", "input", "aalao",
+            "input_int", "number_dalao", "input_float", "decimal_dalao",
+            "input_bool", "haan_na", "type", "append", "pop", "keys", "values",
+            "csv_padho", "csv_likho", "csv_jodo", "csv_badlo", "csv_chhano",
+            "json_padho", "json_likho", "excel_padho", "excel_likho"
+        ]
         bi_pattern = r"\b(" + "|".join(re.escape(k) for k in builtins) + r")\b"
         for m in re.finditer(bi_pattern, content):
             self.text.tag_add("builtin", f"1.0 + {m.start()} chars", f"1.0 + {m.end()} chars")
@@ -587,10 +593,34 @@ class IndLanIDE(tk.Tk):
             sys.stdout = out_buf
             sys.stderr = err_buf
             success = False
+
+            def ide_input(prompt=""):
+                # Flush existing stdout buffer to terminal UI first
+                curr_out = out_buf.getvalue()
+                if curr_out:
+                    self.after(0, lambda t=curr_out: self.log_terminal(t, "stdout"))
+                    out_buf.seek(0)
+                    out_buf.truncate(0)
+
+                res = [None]
+                evt = threading.Event()
+
+                def ask():
+                    try:
+                        p_text = prompt if prompt else "IndLan Input:"
+                        val = simpledialog.askstring("IndLan Input", p_text, parent=self)
+                        res[0] = val if val is not None else ""
+                        self.log_terminal(f"{prompt}{res[0]}\n", "stdout")
+                    finally:
+                        evt.set()
+
+                self.after(0, ask)
+                evt.wait()
+                return res[0]
             try:
                 tokens = tokenize(source)
                 program = parse(tokens)
-                interp = Interpreter(debug=True)
+                interp = Interpreter(debug=True, input_func=ide_input)
                 interp.run(program)
                 success = True
             except LexError as e:
@@ -635,6 +665,11 @@ class IndLanIDE(tk.Tk):
             "• maano / let    (e.g. maano data = pd.csv_padho('file.csv'))\n"
             "• kaam / fun     (e.g. kaam jodo(a, b) { vapas a + b })\n"
             "• agar / if, nahito / else, jabtak / while, pratyek / for\n\n"
+            "User-Input Functions:\n"
+            "• aalao(prompt) / input(prompt)         -> string\n"
+            "• number_dalao(prompt) / input_int(prompt) -> integer\n"
+            "• decimal_dalao(prompt) / input_float(prompt) -> float\n"
+            "• haan_na(prompt) / input_bool(prompt)   -> bool (sahi/galat)\n\n"
             "Universal ML Aliases:\n"
             "• model.sikhao(X, y)          -> fit\n"
             "• model.bhavishyavani(X)      -> predict\n"

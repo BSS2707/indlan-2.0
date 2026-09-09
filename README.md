@@ -321,6 +321,30 @@ IndLan provides out-of-the-box native functions for quick file operations:
 
 ---
 
+## ⌨️ User-Input Functions
+
+IndLan provides intuitive bilingual functions to read user input from the console, terminal, or IDE:
+
+| English Function | IndLan Function | Return Type | Description |
+|---|---|---|---|
+| `input(prompt?)` | `aalao(prompt?)` | `string` | Reads raw user input as a string |
+| `input_int(prompt?)` | `number_dalao(prompt?)` | `integer` | Reads input and converts it to integer |
+| `input_float(prompt?)` | `decimal_dalao(prompt?)` | `float` | Reads input and converts it to float |
+| `input_bool(prompt?)` | `haan_na(prompt?)` | `bool` (`true` / `false`) | Reads input and converts to boolean (`sahi` / `galat`) |
+
+### Example
+
+```indlan
+maano naam = aalao("Apna naam: ")
+maano umar = number_dalao("Umar: ")
+maano height = decimal_dalao("Height: ")
+maano pass = haan_na("Continue? (true/false): ")
+
+chhap("Namaste", naam, "| Umar:", umar, "| Height:", height, "| Pass:", pass)
+```
+
+---
+
 ## 🚢 Publishing to PyPI
 
 To publish a new version of IndLan to PyPI:

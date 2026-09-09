@@ -161,8 +161,9 @@ class IndInstance:
 
 
 class Interpreter:
-    def __init__(self, debug=False):
+    def __init__(self, debug=False, input_func=input):
         self.debug = debug
+        self.input_func = input_func
         self.globals = Environment()
         self.setup_builtins()
 
@@ -212,7 +213,35 @@ class Interpreter:
 
         def ind_input(*args, **kwargs):
             prompt = self.stringify(args[0]) if args else ""
-            return input(prompt)
+            return self.input_func(prompt)
+
+        def ind_number_dalao(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            raw = ind_input(*args, **kwargs)
+            try:
+                return int(raw.strip() if isinstance(raw, str) else raw)
+            except (ValueError, TypeError, AttributeError):
+                raise IndLanRuntimeError(f"Invalid integer input: {raw!r}", line)
+
+        def ind_decimal_dalao(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            raw = ind_input(*args, **kwargs)
+            try:
+                return float(raw.strip() if isinstance(raw, str) else raw)
+            except (ValueError, TypeError, AttributeError):
+                raise IndLanRuntimeError(f"Invalid float input: {raw!r}", line)
+
+        def ind_haan_na(*args, **kwargs):
+            line = kwargs.pop("__line__", None)
+            raw = ind_input(*args, **kwargs)
+            s = (raw.strip() if isinstance(raw, str) else str(raw).strip()).lower()
+            if s in ("true", "sahi", "haan", "yes", "1", "t", "y"):
+                return True
+            elif s in ("false", "galat", "na", "no", "0", "f", "n"):
+                return False
+            raise IndLanRuntimeError(
+                f"Invalid boolean input: {raw!r} (expected 'true'/'false' or 'sahi'/'galat')", line
+            )
 
         def ind_type(*args, **kwargs):
             if not args:
@@ -484,6 +513,13 @@ class Interpreter:
             "int": ind_int,
             "float": ind_float,
             "input": ind_input,
+            "aalao": ind_input,
+            "input_int": ind_number_dalao,
+            "number_dalao": ind_number_dalao,
+            "input_float": ind_decimal_dalao,
+            "decimal_dalao": ind_decimal_dalao,
+            "input_bool": ind_haan_na,
+            "haan_na": ind_haan_na,
             "type": ind_type,
             "append": ind_append,
             "pop": ind_pop,
