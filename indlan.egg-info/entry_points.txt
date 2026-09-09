@@ -1,0 +1,3 @@
+[console_scripts]
+indlan = indlan:main
+indlan-ide = indlan_ide:main

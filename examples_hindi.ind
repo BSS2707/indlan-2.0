@@ -1,0 +1,70 @@
+// IndLan Hindi keyword test - agar/nahito, jabtak, pratyek, karo-jabtak, vibhag
+
+maano umar = 20
+
+agar umar < 13 {
+    chhap("Bachha ho")
+} nahito_agar umar < 20 {
+    chhap("Teenager ho")
+} nahito {
+    chhap("Adult ho")
+}
+
+chhap("== jabtak loop ==")
+maano i = 0
+jabtak i < 5 {
+    chhap("i =", i)
+    i += 1
+}
+
+chhap("== pratyek loop ==")
+pratyek n mein range(5) {
+    agar n == 3 {
+        jaari
+    }
+    chhap("n =", n)
+}
+
+chhap("== karo-jabtak (do-while) ==")
+maano j = 0
+karo {
+    chhap("j =", j)
+    j += 1
+} jabtak j < 3
+
+chhap("== vibhag (switch) ==")
+maano din = 3
+vibhag din {
+    sthiti 1 {
+        chhap("Somvaar")
+    }
+    sthiti 2 {
+        chhap("Mangalvaar")
+    }
+    sthiti 3 {
+        chhap("Budhvaar")
+    }
+    anyatha {
+        chhap("Pata nahi")
+    }
+}
+
+chhap("== function aur class ==")
+kaam jodo(a, b) {
+    vapas a + b
+}
+chhap("jodo(4, 5) =", jodo(4, 5))
+
+varg Animal {
+    kaam init(naam, awaaz) {
+        yeh.naam = naam
+        yeh.awaaz = awaaz
+    }
+    kaam bolo() {
+        chhap(yeh.naam, "bolta hai", yeh.awaaz)
+    }
+}
+maano kutta = naya Animal("Kutta", "Bhow")
+kutta.bolo()
+
+chhap("Sab kaam ho gaya!")

@@ -1,0 +1,24 @@
+// if / elif / else example in IndLan
+
+let age = 20
+
+if age < 13 {
+    print("You are a child")
+} elif age < 20 {
+    print("You are a teenager")
+} else {
+    print("You are an adult")
+}
+
+// another example with score grading
+let score = 75
+
+if score >= 90 {
+    print("Grade: A")
+} elif score >= 75 {
+    print("Grade: B")
+} elif score >= 50 {
+    print("Grade: C")
+} else {
+    print("Grade: F")
+}

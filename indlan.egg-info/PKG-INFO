@@ -1,0 +1,304 @@
+Metadata-Version: 2.4
+Name: indlan
+Version: 2.0.0
+Summary: IndLan Programming Language - Hindi + English Python Ecosystem Interface
+Author: Bhavya S Solanki
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Interpreters
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: data
+Requires-Dist: pandas; extra == "data"
+Requires-Dist: numpy; extra == "data"
+Requires-Dist: matplotlib; extra == "data"
+Requires-Dist: seaborn; extra == "data"
+Requires-Dist: openpyxl; extra == "data"
+Requires-Dist: xlsxwriter; extra == "data"
+Requires-Dist: joblib; extra == "data"
+Provides-Extra: ml
+Requires-Dist: pandas; extra == "ml"
+Requires-Dist: numpy; extra == "ml"
+Requires-Dist: matplotlib; extra == "ml"
+Requires-Dist: seaborn; extra == "ml"
+Requires-Dist: scipy; extra == "ml"
+Requires-Dist: scikit-learn; extra == "ml"
+Requires-Dist: statsmodels; extra == "ml"
+Requires-Dist: joblib; extra == "ml"
+Requires-Dist: openpyxl; extra == "ml"
+Provides-Extra: ai
+Requires-Dist: pandas; extra == "ai"
+Requires-Dist: numpy; extra == "ai"
+Requires-Dist: matplotlib; extra == "ai"
+Requires-Dist: seaborn; extra == "ai"
+Requires-Dist: scikit-learn; extra == "ai"
+Requires-Dist: joblib; extra == "ai"
+Requires-Dist: tensorflow; extra == "ai"
+Requires-Dist: keras; extra == "ai"
+Requires-Dist: torch; extra == "ai"
+Requires-Dist: torchvision; extra == "ai"
+Requires-Dist: pillow; extra == "ai"
+Provides-Extra: full
+Requires-Dist: pandas; extra == "full"
+Requires-Dist: numpy; extra == "full"
+Requires-Dist: matplotlib; extra == "full"
+Requires-Dist: seaborn; extra == "full"
+Requires-Dist: scipy; extra == "full"
+Requires-Dist: scikit-learn; extra == "full"
+Requires-Dist: statsmodels; extra == "full"
+Requires-Dist: plotly; extra == "full"
+Requires-Dist: openpyxl; extra == "full"
+Requires-Dist: xlsxwriter; extra == "full"
+Requires-Dist: joblib; extra == "full"
+Requires-Dist: tensorflow; extra == "full"
+Requires-Dist: keras; extra == "full"
+Requires-Dist: torch; extra == "full"
+Requires-Dist: torchvision; extra == "full"
+Requires-Dist: pillow; extra == "full"
+Requires-Dist: opencv-python; extra == "full"
+Requires-Dist: nltk; extra == "full"
+Requires-Dist: spacy; extra == "full"
+Requires-Dist: transformers; extra == "full"
+
+# IndLan (v2.0)
+
+**IndLan** is a modern programming language and **Hindi + English interface for the entire Python ecosystem**. It allows IndLan programs to seamlessly leverage real, installed Python libraries for Data Science, Machine Learning, AI, Mathematics, Visualization, File Processing, and Scientific Computing.
+
+Made by **Bhavya S Solanki**.
+
+---
+
+## Key Features
+
+- **Generic Python Bridge**: Seamlessly import and call any Python package (`pandas`, `numpy`, `scikit-learn`, `matplotlib`, `seaborn`, `tensorflow`, `torch`, `joblib`, `openpyxl`, `sqlite3`, etc.).
+- **Bilingual English & Hindi APIs**: Write code with English or Hindi keywords and aliases interchangeably (e.g. `import pandas as pd` or `aayat pandas ke_roop_mein pd`).
+- **Real Python Objects**: Transparent bridging keeps objects as real `pandas.DataFrame`, `numpy.ndarray`, `torch.Tensor`, `sklearn` models, etc.
+- **Universal & Library-Specific Hindi Aliases**: `model.sikhao(X, y)` (`fit`), `model.bhavishyavani(X)` (`predict`), `np.sarni()` (`array`), `pd.csv_padho()` (`read_csv`), `plt.rekha()` (`plot`), `ganit.vargmool()` (`sqrt`), etc.
+- **Keyword Arguments**: Full support for Python-style keyword arguments (`train_test_split(X, y, test_size=0.2)`).
+- **Multiple Target Unpacking**: `maano X_train, X_test, y_train, y_test = train_test_split(...)`
+- **Missing Package Diagnostics**: Actionable diagnostics recommending the exact `pip` command and `indlan` extras when a package is not installed.
+- **Native Data Science Helpers**: Built-in convenient `csv_padho`, `csv_likho`, `csv_jodo`, `csv_badlo`, `csv_chhano`, `json_padho`, `json_likho`, `excel_padho`, `excel_likho`.
+
+---
+
+## Installation & Extras
+
+### Basic
+```bash
+pip install indlan
+```
+
+### Data Science
+```bash
+pip install "indlan[data]"
+```
+
+### Machine Learning
+```bash
+pip install "indlan[ml]"
+```
+
+### AI / Deep Learning
+```bash
+pip install "indlan[ai]"
+```
+
+### Complete Ecosystem
+```bash
+pip install "indlan[full]"
+```
+
+---
+
+## CLI Usage
+
+```bash
+indlan                             # Start interactive REPL
+indlan program.ind                 # Run an IndLan program
+indlan run program.ind             # Run an IndLan program
+indlan repl                        # Start REPL
+indlan --debug program.ind         # Run with Python traceback debugging
+indlan --version                   # Show version
+indlan --help                      # Show help
+```
+
+---
+
+## Import Syntax
+
+### English
+```indlan
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from tensorflow import keras
+```
+
+### Hindi
+```indlan
+aayat pandas ke_roop_mein pd
+aayat numpy ke_roop_mein np
+aayat matplotlib.pyplot ke_roop_mein plt
+se sklearn.ensemble aayat RandomForestClassifier
+se tensorflow aayat keras
+```
+
+---
+
+## Complete Data Science Example
+
+### Hindi Style
+
+```indlan
+aayat pandas ke_roop_mein pd
+aayat numpy ke_roop_mein np
+aayat matplotlib.pyplot ke_roop_mein plt
+
+se sklearn.model_selection aayat train_test_split
+se sklearn.ensemble aayat RandomForestClassifier
+se sklearn.metrics aayat satikta_ank
+
+maano data = pd.csv_padho("students.csv")
+chhap(data.shuru_ke(5))
+chhap("Aakar:", data.shape)
+
+maano X = np.sarni([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]])
+maano y = np.sarni([0, 0, 0, 0, 1, 1, 1, 1])
+
+maano X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.25,
+    random_state=42
+)
+
+maano model = RandomForestClassifier(random_state=42)
+model.sikhao(X_train, y_train)
+
+maano prediction = model.bhavishyavani(X_test)
+chhap("Bhavishyavani:", prediction)
+chhap("Satikta:", satikta_ank(y_test, prediction))
+
+plt.rekha(prediction)
+plt.sheershak("Model Prediction")
+plt.jaal(true)
+plt.dikhao()
+```
+
+### English Style
+
+```indlan
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+data = pd.read_csv("students.csv")
+print(data.head(5))
+print("Shape:", data.shape)
+
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]])
+y = np.array([0, 0, 0, 0, 1, 1, 1, 1])
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.25,
+    random_state=42
+)
+
+model = RandomForestClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+prediction = model.predict(X_test)
+print("Prediction:", prediction)
+print("Accuracy:", accuracy_score(y_test, prediction))
+
+plt.plot(prediction)
+plt.title("Model Prediction")
+plt.grid(true)
+plt.show()
+```
+
+---
+
+## Hindi-English Keyword & Method Reference
+
+### Keywords
+| English | Hindi Alias | Meaning |
+|---|---|---|
+| `import` | `aayat` | import module |
+| `from` | `se` | import from module |
+| `as` | `ke_roop_mein` | alias imported item |
+| `let` | `maano` | declare variable |
+| `fun` | `kaam` | declare function |
+| `return` | `vapas` | return from function |
+| `if` | `agar` | if condition |
+| `elif` | `nahito_agar` | else if condition |
+| `else` | `nahito` | else block |
+| `while` | `jabtak` | while loop |
+| `do` | `karo` | do-while loop |
+| `for` | `pratyek` | for loop |
+| `in` | `mein` | in iteration |
+| `switch` | `vibhag` | switch statement |
+| `case` | `sthiti` | case block |
+| `default` | `anyatha` | default block |
+| `class` | `varg` | class definition |
+| `new` | `naya` | instantiate class |
+| `this` | `yeh` | instance reference |
+| `true` | `sahi` | boolean true |
+| `false` | `galat` | boolean false |
+| `null` | `khaali` | null / None |
+| `and` | `aur` | logical and |
+| `or` | `ya` | logical or |
+| `not` | `nahi` | logical not |
+| `break` | `roko` | break loop |
+| `continue` | `jaari` | continue loop |
+| `print` | `chhap` | print output |
+
+### Universal Method Aliases
+| English | Hindi Alias |
+|---|---|
+| `fit` | `sikhao` |
+| `predict` | `bhavishyavani` |
+| `transform` | `badlo` |
+| `fit_transform` | `sikhao_aur_badlo` |
+| `compile` | `sankalit_karo` |
+| `evaluate` | `mulyankan_karo` |
+| `train` | `prashikshan_karo` |
+| `test` | `parikshan_karo` |
+| `save` / `dump` | `bachao` |
+| `load` | `bharit_karo` |
+| `read` | `padho` |
+| `write` | `likho` |
+| `append` | `jodo` |
+| `drop` / `remove` | `hatao` |
+| `filter` | `chhano` |
+| `sort` | `kramit_karo` |
+| `groupby` | `samuha_banao` |
+| `merge` | `milao` |
+| `reshape` | `aakar_badlo` |
+
+---
+
+## Native File Helpers
+
+| Function | Purpose |
+|---|---|
+| `csv_padho(path)` | Read CSV file to records |
+| `csv_likho(path, data)` | Write records / DataFrame to CSV |
+| `csv_jodo(path, row)` | Append row to CSV |
+| `csv_badlo(path, func)` | Transform CSV rows using callback |
+| `csv_chhano(path, func)` | Filter CSV rows using callback |
+| `json_padho(path)` | Parse JSON file |
+| `json_likho(path, data)` | Write JSON file |
+| `excel_padho(path)` | Read Excel sheet (.xlsx / .xlsm) |
+| `excel_likho(path, data)` | Write Excel sheet (.xlsx / .xlsm) |
