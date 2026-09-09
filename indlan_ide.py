@@ -21,7 +21,7 @@ from interpreter import Interpreter, IndLanRuntimeError
 from py_bridge import IndLanImportError, HINDI_METHOD_ALIASES
 
 APP_TITLE = "IndLan 2.0 IDE - Hindi + English Python Ecosystem"
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 
 # Dark Theme Colors
 THEME = {
